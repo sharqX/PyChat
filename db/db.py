@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 MONGO_URI = os.getenv("MONGO_URI")
+
 client = AsyncIOMotorClient(MONGO_URI)
 db = client.chatdb
 collection = db.sessions
@@ -16,17 +17,14 @@ async def create_session(session_id: str):
         "status": "active"
     })
 
-async def update_session(session_id: str, conversation: str):
+async def update_session_status(session_id: str, status: str):
+    await collection.update_one(
+        {"session_id": session_id},
+        {"$set": {"status": status}}
+    )
+
+async def save_conversation(session_id: str, conversation: str):
     await collection.update_one(
         {"session_id": session_id},
         {"$set": {"conversation": conversation}}
-    )
-
-async def end_session(session_id: str, conversation: str):
-    await collection.update_one(
-        {"session_id": session_id},
-        {"$set": {
-            "conversation": conversation,
-            "status": "closed"
-        }}
     )
