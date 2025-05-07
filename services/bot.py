@@ -2,19 +2,22 @@ from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 
 template = """
-You are a asistant of developer, help them with coding, fixing bugs and genrating code.
+You are a helpful assistant for developers. Assist with coding, fixing bugs, and generating code.
 
-Here is the conversation history: {context}
+Conversation history:
+{context}
 
-Question {question}
+User question:
+{question}
 
-Answer:
+Assistant:
 """
 
+model = OllamaLLM(model="llama3")
+prompt = ChatPromptTemplate.from_template(template)
+chain = prompt | model
 
-model = OllamaLLM(model="codellama:13b")
-promt = ChatPromptTemplate.from_template(template)
-chain = promt | model
+
 
 def handle_conversation(context: str, question: str) -> str:
     response = chain.invoke({"context": context, "question": question})
