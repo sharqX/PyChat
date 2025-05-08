@@ -9,7 +9,7 @@ app = FastAPI()
 async def chat(websocket: WebSocket):
     await websocket.accept()
     session_id = str(uuid.uuid4())
-    context = {}
+    context = ""
 
     await create_session(session_id)  # Insert with status: active
     await update_session_status(session_id, "active")
@@ -25,7 +25,7 @@ async def chat(websocket: WebSocket):
                 await websocket.close()
                 break
 
-            response = handle_conversation(context, data)
+            response = await handle_conversation(context, data)
             context += f"\nUser: {data}\nAI: {response}"
             await websocket.send_text(response)
 

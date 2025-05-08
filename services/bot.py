@@ -1,3 +1,4 @@
+import asyncio
 from langchain_ollama import OllamaLLM
 from langchain_core.prompts import ChatPromptTemplate
 
@@ -17,6 +18,9 @@ model = OllamaLLM(model="llama3")
 prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
-def handle_conversation(context: str, question: str) -> str:
-    response = chain.invoke({"context": context, "question": question})
-    return response
+
+async def handle_conversation(context: str, question: str) -> str:
+    return await asyncio.to_thread(
+        chain.invoke,
+        {"context": context, "question": question}
+    )
