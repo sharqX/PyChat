@@ -11,7 +11,7 @@ async def chat(websocket: WebSocket):
     session_id = str(uuid.uuid4())
     context = ""
 
-    await create_session(session_id)  # Insert with status: active
+    await create_session(session_id)
     await update_session_status(session_id, "active")
 
     try:
