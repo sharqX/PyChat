@@ -5,11 +5,11 @@ import uuid
 
 app = FastAPI()
 
-@app.websocket("/chat")
+@app.websocket("/")
 async def chat(websocket: WebSocket):
     await websocket.accept()
     session_id = str(uuid.uuid4())
-    context = ""
+    context = {}
 
     await create_session(session_id)  # Insert with status: active
     await update_session_status(session_id, "active")

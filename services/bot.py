@@ -17,8 +17,6 @@ model = OllamaLLM(model="llama3")
 prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
-
-
 def handle_conversation(context: str, question: str) -> str:
     response = chain.invoke({"context": context, "question": question})
     return response
