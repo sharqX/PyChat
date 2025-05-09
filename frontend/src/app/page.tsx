@@ -38,10 +38,10 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col h-screen bg-[#0D0D0D] text-white font-sans">
+    <div className="flex flex-col h-screen  text-white">
       <div className="flex-1 overflow-y-auto px-6 py-10 space-y-6">
         {messages.length === 0 ? (
-          <div className="h-full flex items-center justify-center">
+          <div className="h-full flex items-center justify-center font-[family-name:var(--font-playfair_display)]">
             <h2 className="text-lg sm:text-2xl text-gray-300">
               <span className="text-orange-500 text-3xl">⚡</span> Yo! Codey in the house. Ready to debug, deploy, or just chat?
             </h2>
@@ -50,7 +50,7 @@ export default function Home() {
           messages.map((msg, i) => (
             <div
               key={i}
-              className={`max-w-2xl mx-auto px-4 py-3 rounded-xl whitespace-pre-wrap ${
+              className={`max-w-2xl mx-auto px-4 py-3 rounded-xl whitespace-pre-wrap font-[family-name:var(--font-playfair_display)] ${
                 msg.sender === "You"
                   ? "bg-[#FBF6E2] text-gray-800 self-end"
                   : msg.sender === "System"
@@ -69,7 +69,7 @@ export default function Home() {
       </div>
 
       <div className="border-t border-white/10 px-6 py-4 bg-[#0A0A0A]">
-        <div className="max-w-3xl mx-auto flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-2 backdrop-blur-md">
+        <div className="max-w-3xl mx-auto flex items-center gap-3 bg-white/5 border border-white/10 rounded-xl px-4 py-2 backdrop-blur-md font-[family-name:var(--font-playfair_display)]">
           <input
             type="text"
             placeholder="Send a message..."
