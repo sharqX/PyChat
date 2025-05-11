@@ -29,7 +29,7 @@ User question:
 Assistant:
 """
 
-model = OllamaLLM(base_url=os.getenv("OLLAMA_URI"), model="llama3")
+model = OllamaLLM(base_url=os.getenv("OLLAMA_URI"), model=os.getenv("MODEL"))
 prompt = ChatPromptTemplate.from_template(template)
 chain = prompt | model
 
