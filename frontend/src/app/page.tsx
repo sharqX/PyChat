@@ -8,7 +8,7 @@ export default function Home() {
   const bottomRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const socket = new WebSocket("ws://localhost:8000/");
+    const socket = new WebSocket("ws://localhost:8000/chat");
     socketRef.current = socket;
 
     socket.onmessage = (event) => {

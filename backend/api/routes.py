@@ -1,11 +1,18 @@
 from fastapi import FastAPI, WebSocket, WebSocketDisconnect
 from services.bot import handle_conversation
 from db.db import create_session, update_session_status, save_conversation
+import requests
 import uuid
+import os
 
-app = FastAPI()
+app = FastAPI() 
 
-@app.websocket("/")
+@app.get("/")
+def root():
+    ollama = requests.get(os.getenv("OLLAMA_URI"))
+    return {f"'Backend is running 🔅' , '{ollama.text} ⚡'"}
+
+@app.websocket("/chat")
 async def chat(websocket: WebSocket):
     await websocket.accept()
     session_id = str(uuid.uuid4())
