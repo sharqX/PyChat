@@ -1,2 +1,2 @@
 # PyChat
-A simple python chat bot
+A simple python AI chat bot
