@@ -42,6 +42,18 @@ services:
     networks:
       - pyChat-network
 
+  nginx:
+    container_name: nginx-proxy
+    restart: unless-stopped
+    image: nginx
+    ports:
+      - 80:80
+      - 433:433
+    depends_on:
+      - frontend
+    networks:
+      - pyChat-network
+
 volumes:
   ollama:
 
